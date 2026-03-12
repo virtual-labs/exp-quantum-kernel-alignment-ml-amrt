@@ -1,4 +1,4 @@
-## References
+
 
 - [Quantum Machine Learning in Feature Hilbert Spaces: Kernel Methods and the Quantum Advantage](https://arxiv.org/abs/1803.07128)
 
