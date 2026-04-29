@@ -10,12 +10,17 @@
 
 #### 1. Introduction
 
-Machine Learning models often rely on **feature transformations** to make complex data patterns easier to separate. Many datasets are **not linearly separable** in their original feature space. Kernel methods solve this by implicitly mapping data into a **higher-dimensional space** where linear separation becomes possible.
+Machine Learning models often rely on **feature transformations** to make complex data patterns easier to separate. Many real-world datasets are **not linearly separable** in their original feature space, meaning that a simple straight-line (or hyperplane) decision boundary is not sufficient to distinguish between classes.
 
-Quantum computing introduces a new approach called **Quantum Kernel Methods**, where classical data is encoded into **quantum states** using quantum circuits. These quantum states naturally exist in very high-dimensional Hilbert spaces, allowing machine learning models to capture complex patterns that may be difficult for classical kernels.
+Kernel methods address this challenge by implicitly mapping data into a **higher-dimensional space**, where the same data may become linearly separable. This is achieved without explicitly computing the transformation, using a concept known as the **kernel trick**, which efficiently measures similarity between data points in the transformed space.
 
-Quantum kernel alignment is a technique used to measure **how well a kernel function represents the structure of labeled data**, helping determine whether the quantum feature map is useful for classification tasks.
+Quantum computing introduces a new approach called **Quantum Kernel Methods**, where classical data is encoded into **quantum states** using quantum circuits. These quantum states exist in a **high-dimensional Hilbert space**, whose size grows exponentially with the number of qubits. This allows quantum systems to represent complex feature relationships using properties such as superposition and entanglement.
 
+As a result, quantum feature mappings can capture patterns that may be difficult for classical kernels to represent effectively, especially in highly complex or structured datasets.
+
+Quantum Kernel Alignment is a technique used to measure **how well a kernel function reflects the structure of labeled data**. It evaluates the similarity between the kernel matrix and the label relationships, providing a quantitative way to assess whether a chosen feature map—classical or quantum—is suitable for classification tasks.
+
+A higher alignment indicates that the kernel captures meaningful patterns in the data, while a lower alignment suggests that the feature representation may not be effective.
 
 #### 2. Kernel Methods in Classical Machine Learning
 
