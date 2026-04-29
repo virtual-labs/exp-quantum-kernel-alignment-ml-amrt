@@ -1,3 +1,13 @@
+<script>
+  MathJax = {
+    tex: {
+      inlineMath: [['$', '$'], ['\\(', '\\)']]
+    }
+  };
+</script>
+<script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
+<script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+
 #### 1. Introduction
 
 Machine Learning models often rely on **feature transformations** to make complex data patterns easier to separate. Many real-world datasets are **not linearly separable** in their original feature space, meaning that a simple straight-line (or hyperplane) decision boundary is not sufficient to distinguish between classes.
@@ -22,23 +32,25 @@ A **kernel function** computes the similarity between two data points without ex
 
 Mathematically, a kernel function can be written as:
 
-K(x1, x2) = φ(x1) · φ(x2)
+$$
+K(x_1, x_2) = \phi(x_1) \cdot \phi(x_2)
+$$
 
 Where:
 
-- x1 and x2 are input data points  
-- φ(x) is a feature mapping function  
-- K(x1, x2) represents similarity in the transformed feature space  
+- $x_1$ and $x_2$ are input data points  
+- $\phi(x)$ is a feature mapping function  
+- $K(x_1, x_2)$ represents similarity in the transformed feature space  
 
-Instead of computing φ(x) explicitly, kernel methods compute the **inner product in the transformed feature space directly**. This idea is known as the **kernel trick**.
+Instead of computing $\phi(x)$ explicitly, kernel methods compute the **inner product in the transformed feature space directly**. This idea is known as the **kernel trick**.
 
 ##### Common Classical Kernels
 
 | Kernel | Formula | Use Case |
 |------|------|------|
-| Linear | x1 · x2 | Linearly separable data |
-| Polynomial | (x1 · x2 + c) raised to power d | Moderate nonlinear patterns |
-| RBF (Gaussian) | exp( −γ × distance(x1, x2)² ) | Highly nonlinear datasets |
+| Linear | $x_1 \cdot x_2$ | Linearly separable data |
+| Polynomial | $(x_1 \cdot x_2 + c)^d$ | Moderate nonlinear patterns |
+| RBF (Gaussian) | $\exp(-\gamma \|x_1 - x_2\|^2)$ | Highly nonlinear datasets |
 
 Although powerful, classical kernels may struggle with extremely complex data distributions or require expensive computations for large datasets.
 
@@ -48,23 +60,27 @@ Although powerful, classical kernels may struggle with extremely complex data di
 
 Quantum Machine Learning uses **quantum circuits to encode classical data into quantum states**. This process is known as **quantum feature mapping**.
 
-A data point x is encoded into a quantum state using a quantum circuit:
+A data point $x$ is encoded into a quantum state using a quantum circuit:
 
-ψ(x) = U(x) applied to the initial quantum state
+$$
+|\psi(x)\rangle = U(x)|0\rangle^{\otimes n}
+$$
 
 Where:
 
-- U(x) is the quantum feature map (a parameterized quantum circuit)  
-- The initial state represents the starting qubit state  
-- ψ(x) represents the quantum state encoding the data  
+- $U(x)$ is the quantum feature map (a parameterized quantum circuit)  
+- $|0\rangle^{\otimes n}$ represents the starting qubit state  
+- $|\psi(x)\rangle$ represents the quantum state encoding the data  
 
 Quantum feature maps create complex entangled states in a **Hilbert space**, whose dimension grows exponentially with the number of qubits.
 
 Example:
 
-If a quantum circuit uses **n qubits**, the Hilbert space dimension becomes:
+If a quantum circuit uses **$n$ qubits**, the Hilbert space dimension becomes:
 
-2 raised to the power n
+$$
+2^n
+$$
 
 This exponential dimensionality allows quantum models to represent complex feature relationships efficiently.
 
@@ -76,12 +92,14 @@ The **quantum kernel** measures similarity between two quantum states.
 
 It is defined as the squared magnitude of the inner product between two quantum states:
 
-K(x1, x2) = | ⟨ψ(x1) | ψ(x2)⟩ |²
+$$
+K(x_1, x_2) = |\langle\psi(x_1) | \psi(x_2)\rangle|^2
+$$
 
 Where:
 
-- ψ(x1) represents the quantum state encoding data point x1  
-- ψ(x2) represents the quantum state encoding data point x2  
+- $|\psi(x_1)\rangle$ represents the quantum state encoding data point $x_1$  
+- $|\psi(x_2)\rangle$ represents the quantum state encoding data point $x_2$  
 
 This inner product can be computed using **quantum circuits**, such as the **swap test**, or simulated using classical computers.
 
@@ -91,11 +109,13 @@ The result is a **quantum kernel matrix**, which stores similarity values betwee
 
 #### 5. Kernel Matrix
 
-For a dataset containing N samples, the **kernel matrix K** stores similarity values between every pair of samples.
+For a dataset containing $N$ samples, the **kernel matrix $K$** stores similarity values between every pair of samples.
 
 Each matrix element represents:
 
-K(i, j) = similarity between data point i and data point j
+$$
+K_{ij} = K(x_i, x_j)
+$$
 
 Important properties of the kernel matrix:
 
@@ -105,11 +125,11 @@ Important properties of the kernel matrix:
 
 Example structure:
 
-| | x1 | x2 | x3 |
+| | $x_1$ | $x_2$ | $x_3$ |
 |---|---|---|---|
-| x1 | K11 | K12 | K13 |
-| x2 | K21 | K22 | K23 |
-| x3 | K31 | K32 | K33 |
+| **$x_1$** | $K_{11}$ | $K_{12}$ | $K_{13}$ |
+| **$x_2$** | $K_{21}$ | $K_{22}$ | $K_{23}$ |
+| **$x_3$** | $K_{31}$ | $K_{32}$ | $K_{33}$ |
 
 Visualizing this matrix often reveals clusters or patterns within the dataset.
 
@@ -121,13 +141,14 @@ Kernel alignment evaluates **how well a kernel captures the relationship between
 
 It measures similarity between:
 
-- the **kernel matrix K**
-- the **label similarity matrix Y**
+- the **kernel matrix $K$**
+- the **label similarity matrix $Y$**
 
 The alignment score is calculated as:
 
-Alignment(K, Y) = inner product of matrices K and Y divided by  
-square root of ( inner product of K with K × inner product of Y with Y )
+$$
+A(K, Y) = \frac{\langle K, Y \rangle_F}{\sqrt{\langle K, K \rangle_F \langle Y, Y \rangle_F}}
+$$
 
 The inner product used here is called the **Frobenius inner product**, which multiplies corresponding matrix elements and sums the results.
 
@@ -135,8 +156,8 @@ The inner product used here is called the **Frobenius inner product**, which mul
 
 | Alignment Score | Meaning |
 |---|---|
-| Close to 1 | Kernel strongly matches label structure |
-| Around 0 | Weak correlation |
+| Close to $1$ | Kernel strongly matches label structure |
+| Around $0$ | Weak correlation |
 | Negative | Kernel contradicts labels |
 
 
