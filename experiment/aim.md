@@ -1,1 +1,1 @@
-### Aim of the experiment
+To visualize how quantum kernels can transform data into higher-dimensional spaces.
